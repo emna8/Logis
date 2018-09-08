@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+      <!-- Required meta tags -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+   
+    <!-- Bootstrap core CSS -->
+    <link href="../assets/bootstrap.min.css" rel="stylesheet">
+    <link rel="shortcut icon" href="../static/delivery-truck.png"/>
+
+    <!-- Custom styles for this template -->
+    <link href="../static/dashboard.css" rel="stylesheet">
+    <link href="../assets/mdb.css" rel="stylesheet">
+    <link href="../assets/bootstrap.min.css">
+    <link href="../assets/mdb.min.css">
+      {%if title%}    
+    <title>Dashboard -- {{title}}</title>
+    {%else%}
+    <title>Dashboard</title>
+    {%endif%}
+    
+</head>
+<body>
+        <header class="site-header">
+                <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+                  <div class="container">
+                    <a class="navbar-brand mr-4" href="/">Dashboard</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  </div>
+                </nav>
+              </header>
+              <img src="../static/map.png" width="240" height="410" class="left"/>
+              
+              <main role="main" class="container">
+                  
+                  {% block content %}{% endblock %}
+                  
+              </main>
+   <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+   <script src="../assets/js/vendor/popper.min.js"></script>
+   <script src="../assets/bootstrap.min.css"></script>
+
+       <!-- Placed at the end of the document so the pages load faster -->
+       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+       <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+       <script src="../assets/js/vendor/popper.min.js"></script>
+       <script src="../assets/bootstrap.min.css"></script>
+
+<!-- Footer -->
+<footer >
+
+    <!-- Copyright -->
+    <div class="footer">© 2018 Copyright:
+      <a href="https://datavora.com/" target="_blank" ><strong>Datavora</strong></a>
+   <!-- <a href="https://datavora.com/" > <img target="_blank" src="../static/logo.png"/> </a>-->
+    </div>
+    <!-- Copyright -->
+  
+  </footer>
+  <!-- Footer -->
+
+       </body>
+</html>

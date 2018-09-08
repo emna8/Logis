@@ -1,0 +1,189 @@
+{% extends "_layout.html" %}
+<!doctype html>
+<html lang="en">
+{%block content%}
+
+<div id="chartContainer" style="height: 300px; width: 85%;"></div>
+
+<button class="button button1" style="font-size:16px;" id="exportChart">Export Chart</button>
+
+ <div id="chartLoc" style="height: 300px; width: 85%;"></div>
+ <button class="button button1" style="font-size:16px;" id="exportChartLoc">Export Chart</button>
+ 
+ <div id="chartRatio" style="height: 300px; width: 85%;"></div>
+ <button class="button button1" style="font-size:16px;" id="exportChartRatio">Export Chart</button>
+ 
+ <h1 style="font: bold">Marketplace </h1>  
+
+    <div class="inline">
+      
+      <canvas  id="chart_mark" width="250" height="320"></canvas>
+      <h3>Vente&amp;Location &nbsp; </h3> 
+    </div>
+      
+    <div class="inline"> 
+        <canvas  id="chart_loc" width="250" height="320"></canvas>
+      <h3>Location</h3>
+  </div>
+
+  <div class="inline">
+      <canvas  id="chart_vente" width="250" height="320"></canvas>
+      <h3>Vente</h3> 
+    </div>    
+      <br><br>  <br><br> <br><br> <br>
+      </div>
+        <button class="button button1" style="font-size:30px;"><a href={{ url_for('next',id=1) }}>Next extraction</a></button>
+     
+
+    <!-- Graphs -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>   
+    
+ <script>
+
+  var pieData = [
+    {% for item, label, colors in set %}
+      {
+        value: {{item}},
+        label: "{{label}}",
+        color : "{{colors}}"
+      },
+    {% endfor %}
+  ];
+  // get bar chart canvas
+  var mychart = document.getElementById("chart_vente").getContext("2d");
+  steps = 10
+  max = {{ max }}
+  // draw pie chart
+  new Chart(document.getElementById("chart_vente").getContext("2d")).Pie(pieData);
+
+  var pieData_loc = [
+    {% for item, label, colors in set2 %}
+      {
+        value: {{item}},
+        label: "{{label}}",
+        color : "{{colors}}"
+      },
+    {% endfor %}
+  ];
+  // get bar chart canvas
+  var mychart = document.getElementById("chart_loc").getContext("2d");
+  steps = 10
+  max = {{ max }}
+  // draw pie chart
+  new Chart(document.getElementById("chart_loc").getContext("2d")).Pie(pieData_loc);
+
+  var pieData_mark = [
+ 
+    {% for item, label, colors in set3 %}
+      {
+        value: {{item}},
+        label: "{{label}}",
+        color : "{{colors}}",
+        
+      },
+      
+    {% endfor %}
+    
+  ];
+  // get bar chart canvas
+  var mychart = document.getElementById("chart_mark").getContext("2d");
+  steps = 10
+  max = {{ max }}
+  // draw pie chart
+  new Chart(document.getElementById("chart_mark").getContext("2d")).Pie(pieData_mark);
+
+
+
+    
+
+</script>
+
+
+<script type="text/javascript">
+window.onload = function () {
+	var chart = new CanvasJS.Chart("chartContainer", {
+		theme: "theme3",
+		title:{
+			text: "Prix par m2 en Vente "              
+		},
+		data: [              
+		{
+			type: "column",
+			dataPoints:[
+            {% for d in data_points %} 
+                { label:"{{d.label}}",  y: {{d.y}} },
+            {%endfor%}
+            ]
+
+		}
+		]
+	});
+  
+	chart.render();
+ 	document.getElementById("exportChart").addEventListener("click",function(){
+    	chart.exportChart({format: "jpg"});
+    });  
+
+    	var chart_loc = new CanvasJS.Chart("chartLoc", {
+		theme: "theme8",
+		title:{
+			text: "Prix par m2 en Loc "              
+		},
+        axisX:{
+      interval: 1,
+      labelAngle: -70 
+     },
+		data: [              
+		{
+			type: "column",
+			dataPoints:[
+            {% for d in data_points_loc %} 
+                { label:"{{d.label}}",  y: {{d.y}} },
+            {%endfor%}
+            ]
+
+		}
+		]
+	});
+  
+	chart_loc.render();
+ 	document.getElementById("exportChartLoc").addEventListener("click",function(){
+    	chart.exportChart({format: "jpg"});
+    }); 
+
+    	var chart_loc = new CanvasJS.Chart("chartRatio", {
+		theme: "theme8",
+		title:{
+			text: "Prix par m2 en Ratio"              
+		},
+		data: [              
+		{
+			type: "column",
+			dataPoints:[
+            {% for d in data_points_ratio %} 
+                { label:"{{d.label}}",  y: {{d.y}} },
+            {%endfor%}
+            ]
+
+		}
+		]
+	});
+  
+	chart_loc.render();
+ 	document.getElementById("exportChartRatio").addEventListener("click",function(){
+    	chart.exportChart({format: "jpg"});
+    }); 
+
+}
+</script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+
+
+ <br>
+ <br>
+ 
+ <br>
+ <br>
+
+{%endblock%}

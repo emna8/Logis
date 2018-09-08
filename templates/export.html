@@ -1,0 +1,98 @@
+{% extends "_layout.html" %}
+<!doctype html>
+<html lang="en">
+{%block content%}
+<script type="text/javascript">
+window.onload = function () {
+	var chart = new CanvasJS.Chart("chartContainer", {
+		theme: "theme3",
+		title:{
+			text: "Prix par m2 en Vente / 1000"              
+		},
+		data: [              
+		{
+			type: "column",
+			dataPoints:[
+            {% for d in data_points %} 
+                { label:"{{d.label}}",  y: {{d.y}} },
+            {%endfor%}
+            ]
+
+		}
+		]
+	});
+  
+	chart.render();
+ 	document.getElementById("exportChart").addEventListener("click",function(){
+    	chart.exportChart({format: "jpg"});
+    });  
+
+    	var chart_loc = new CanvasJS.Chart("chartLoc", {
+		theme: "theme8",
+		title:{
+			text: "Prix par m2 en Loc / 1000"              
+		},
+		data: [              
+		{
+			type: "column",
+			dataPoints:[
+            {% for d in data_points_loc %} 
+                { label:"{{d.label}}",  y: {{d.y}} },
+            {%endfor%}
+            ]
+
+		}
+		]
+	});
+  
+	chart_loc.render();
+ 	document.getElementById("exportChartLoc").addEventListener("click",function(){
+    	chart.exportChart({format: "jpg"});
+    }); 
+
+    	var chart_loc = new CanvasJS.Chart("chartRatio", {
+		theme: "theme8",
+		title:{
+			text: "Prix par m2 en Ratio / 1000"              
+		},
+		data: [              
+		{
+			type: "column",
+			dataPoints:[
+            {% for d in data_points_ratio %} 
+                { label:"{{d.label}}",  y: {{d.y}} },
+            {%endfor%}
+            ]
+
+		}
+		]
+	});
+  
+	chart_loc.render();
+ 	document.getElementById("exportChartRatio").addEventListener("click",function(){
+    	chart.exportChart({format: "jpg"});
+    }); 
+
+}
+</script>
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 85%;"></div>
+
+<button class="button button1" style="font-size:16px;" id="exportChart">Export Chart</button>
+
+ <div id="chartLoc" style="height: 300px; width: 85%;"></div>
+ <button class="button button1" style="font-size:16px;" id="exportChartLoc">Export Chart</button>
+ 
+ <div id="chartRatio" style="height: 300px; width: 85%;"></div>
+ <button class="button button1" style="font-size:16px;" id="exportChartRatio">Export Chart</button>
+ 
+
+ <br>
+ <br>
+ 
+ <br>
+ <br>
+
+{%endblock%}
