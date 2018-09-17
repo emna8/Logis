@@ -11,20 +11,18 @@ cols = ["#f01414", "#FFA500", "#ABCABC"]
 
 
 # **********************************************List COUTRIES***************************************
-list_country_vente = ['Bizerte', 'Banlieue Nord', 'Ariana', 'Ben arous', 'Mannouba', 'Nabeul', 'Sfax', 'Sousse',
-                      'Monastir', 'Mahdia',  'Djerba'
+list_country_vente = ['Bizerte', 'Banlieue Nord','Les Berges du Lac', 'Ariana', 'Ben arous','Sousse', 'Mannouba', 'Nabeul', 'Sfax',
+                       'Mahdia',  'Djerba'
                       ]
 
-list_country_loc = ['Bizerte', 'Banlieue Nord', 'Ariana', 'Ben arous',  'Bardo', 'Mannouba', 'Nabeul',   'Sfax',
+list_country_loc = ['Bizerte', 'Banlieue Nord','Ariana', 'Ben arous',  'Bardo', 'Mannouba', 'Nabeul',   'Sfax',
                     'Sousse',   'Mahdia', 'Monastir',
                     'Gabes',  'Jendouba']
 
 list_country_ratio = list(
     set(list_country_vente).intersection(list_country_loc))
 
-market_vente = ["Tayara", "Jumia"]
-market_all = ["Tayara", "Jumia", "Tunisie annonce"]
-market_lic = ["Tayara", "Tunisie annonce"]
+
 #**************************************************************************************......
 
 
@@ -50,7 +48,6 @@ def ratio(str, df_vente, df_loc):
     vente = avg(str, df_vente)
     loc = avg(str, df_loc)
     if(loc != 0):
-        print(f"1 {loc}")
         return vente/loc
     else:
         print(f"2 {loc}")
@@ -79,8 +76,6 @@ def fill_all_ratio():
     return all_ratio
 
 
-def shape_market(csv_file):
-    return pd.read_csv(csv_file, encoding='ISO-8859-1').shape[0]
 
 """def fill_all_market_values(market,status):#market is jumia , tayara or tunisie
     list_to_fill=list()
@@ -93,20 +88,112 @@ all_list_avg_vente=fill_all_avgs(all_df_vente,list_country_vente)
 all_list_avg_loc=fill_all_avgs(all_df_loc,list_country_loc)            
 all_list_ratio=fill_all_ratio()
 
-# *********************RATIO***************************
+# *********************Banlieue***************************
+def mean_detail(list_to_data):
+    d=pd.DataFrame({"a":list_to_data})  
+    return d.a.mean()
+
+
+
+    
+def avg_detail(folder,list_detail_coutries):
+    list_detail=list()
+    list_annonce=list()
+    for c in list_detail_coutries:
+        try:
+            df=pd.read_csv(rf'{folder}\{c}.csv',encoding="latin 1")
+            v=df["Moy_prix_by_size"].mean()
+            an=df.shape[0] # i will send vente country also for loc, if it doesnt exists : an=0
+            list_annonce.append(an)
+            list_detail.append(v)
+        except:
+            an=0 
+            list_annonce.append(an)
+    return list_detail,list_annonce
+#*************************************************************
+list_country_vente_Banlieue=["Carthage","Goulette","Kram","Marse","Sidi_bou_said","Gammarth"]
+list_country_vente_lac=["Lac1","Lac2"]
+list_country_vente_ariana=["Aouina","Chotrana","Cite ghazela","Ennasr","Menzah","Raoued","Sokra"]
+list_country_vente_benaous=["Boumhel","El mourouj","Ezzahra","Rades"]
+list_country_vente_sousse=["Chatt Meriem","Hergla","Kantaoui","Khezema"]
+
+list_country_loc_Banlieue=["Carthage","Goulette","Kram","Marse"]
+list_country_loc_sousse=["Chatt Meriem","Hergla","Kantaoui"]
+#****************************************************************
+def list_vente(i):#also ANNONCE
+    list_all_vente=list()
+    list_ban_vente,ann_ban_v=avg_detail(f"Banlieue_vente{i}",list_country_vente_Banlieue)
+    list_lac_vente,ann_lac_v=avg_detail(f"Lac_vente{i}",list_country_vente_lac)
+    list_ariana_vente,ann_ariana_v=avg_detail(f"Ariana_vente{i}",list_country_vente_ariana)
+    list_benaous_vente,ann_benarous_v=avg_detail(f"Ben arous_vente{i}",list_country_vente_benaous)
+    list_sousse_vente,ann_sousse_v=avg_detail(f"Sousse_vente{i}",list_country_vente_sousse)  
+    list_all_vente=[list_ban_vente,list_lac_vente,list_ariana_vente,list_benaous_vente,list_sousse_vente]
+    list_all_an_vente=[ann_ban_v,ann_lac_v,ann_ariana_v,ann_benarous_v,ann_sousse_v]
+    return list_all_vente,list_all_an_vente
+
+#**************************************************************
+def list_loc(i):
+    list_all_loc=list()
+    list_ban_loc,ann_ban_l=avg_detail(f"Banlieue_loc{i}",list_country_vente_Banlieue)
+    x,ann_lac_v=avg_detail(f"Lac_loc{i}",list_country_vente_lac)
+    list_ariana_loc,ann_ariana_l=avg_detail(f"Ariana_loc{i}",list_country_vente_ariana)
+    list_benaous_loc,ann_benarous_l=avg_detail(f"Ben arous_loc{i}",list_country_vente_benaous)
+    list_sousse_loc,ann_sousse_l=avg_detail(f"Sousse_loc{i}",list_country_vente_sousse)  
+    list_all_loc=[list_ban_loc,list_ariana_loc,list_benaous_loc,list_sousse_loc]
+    list_all_an_loc=[ann_ban_l,ann_lac_v,ann_ariana_l,ann_benarous_l,ann_sousse_l]
+    return list_all_loc,list_all_an_loc
+
+avg_list_vente1,ann_vente1=list_vente(1)
+avg_list_vente2,ann_vente2=list_vente(2)
+
+avg_list_loc1,ann_loc1=list_loc(1)
+avg_list_loc2,ann_loc2=list_loc(2)
+
+all_list_ann_vente=[ann_vente1,ann_vente2]
+all_list_ann_loc=[ann_loc1,ann_loc2]
+
+all_list_country_vente_detail=[list_country_vente_Banlieue,list_country_vente_lac,list_country_vente_ariana,list_country_vente_benaous,list_country_vente_sousse]
+dict_vente1=dict()
+dict_vente1={"Banlieue Nord":[list_country_vente_Banlieue,avg_list_vente1[0]],"Les Berges du Lac":[list_country_vente_lac,avg_list_vente1[1]],"Ariana":[list_country_vente_ariana,avg_list_vente1[2]],'Ben arous':[list_country_vente_benaous,avg_list_vente1[3]],"Sousse":[list_country_vente_sousse,avg_list_vente1[4]]}
+
+dict_loc1=dict()
+dict_loc1={"Banlieue Nord":[list_country_loc_Banlieue,avg_list_loc1[0]],"Les Berges du Lac":[list(),list()],"Ariana":[list_country_vente_ariana,avg_list_loc1[1]],'Ben arous':[list_country_vente_benaous,avg_list_loc1[2]],"Sousse":[list_country_loc_sousse,avg_list_loc1[3]]}
+
 # ************************************************************************************
+dict_vente2=dict()
+dict_vente2={"Banlieue Nord":[list_country_vente_Banlieue,avg_list_vente2[0]],"Les Berges du Lac":[list_country_vente_lac,avg_list_vente2[1]],"Ariana":[list_country_vente_ariana,avg_list_vente2[2]],'Ben arous':[list_country_vente_benaous,avg_list_vente2[3]],"Sousse":[list_country_vente_sousse,avg_list_vente2[4]]}
 
+dict_loc2=dict()
+dict_loc2={"Banlieue Nord":[list_country_loc_Banlieue,avg_list_loc2[0]],"Les Berges du Lac":[list(),list()],"Ariana":[list_country_vente_ariana,avg_list_loc2[1]],'Ben arous':[list_country_vente_benaous,avg_list_loc2[2]],"Sousse":[list_country_loc_sousse,avg_list_loc2[3]]}
 
+#**************************************xxxxxxxx**********************************************
 
-"""j = shape_market("jumia_vente2.csv")
-tay_v = shape_market("tayara_vente2.csv")
-tay_l = shape_market("tayara_loc2.csv")
-tu = shape_market("tunisie_loc2.csv")
-list_market_vente1 = [j, tay_v]
-list_market_loc1 = [tay_l, tu]
-list_market_values1 = [tay_l+tay_v, j, tu]"""
+dict_detail1={"Banlieue Nord":[list_country_vente_Banlieue,ann_vente1[0],ann_loc1[0],avg_list_vente1[0],avg_list_loc1[0],mean_detail(avg_list_vente1[0]),mean_detail(avg_list_loc1[0])],"Les Berges du Lac":[list_country_vente_lac,ann_vente1[1],ann_loc1[1],avg_list_vente1[1],list(),mean_detail(avg_list_vente1[1]),-1],"Ariana":[list_country_vente_ariana,ann_vente1[2],ann_loc1[2],avg_list_vente1[2],avg_list_loc1[1],mean_detail(avg_list_vente1[2]),mean_detail(avg_list_loc1[1])],'Ben arous':[list_country_vente_benaous,ann_vente1[3],ann_loc1[3],avg_list_vente1[3],avg_list_loc1[2],mean_detail(avg_list_vente1[3]),mean_detail(avg_list_loc1[2])],"Sousse":[list_country_vente_sousse,ann_vente1[4],ann_loc1[4],avg_list_vente1[4],avg_list_loc1[3],mean_detail(avg_list_vente1[4]),mean_detail(avg_list_loc1[3])]}
+dict_detail2={"Banlieue Nord":[list_country_vente_Banlieue,ann_vente2[0],ann_loc2[0],avg_list_vente2[0],avg_list_loc2[0],mean_detail(avg_list_vente2[0]),mean_detail(avg_list_loc2[0])],"Les Berges du Lac":[list_country_vente_lac,ann_vente2[1],ann_loc2[1],avg_list_vente2[1],list(),mean_detail(avg_list_vente2[1]),-1],"Ariana":[list_country_vente_ariana,ann_vente2[2],ann_loc2[2],avg_list_vente2[2],avg_list_loc2[1],mean_detail(avg_list_vente2[2]),mean_detail(avg_list_loc2[1])],'Ben arous':[list_country_vente_benaous,ann_vente2[3],ann_loc2[3],avg_list_vente2[3],avg_list_loc2[2],mean_detail(avg_list_vente2[3]),mean_detail(avg_list_loc2[2])],"Sousse":[list_country_vente_sousse,ann_vente2[4],ann_loc2[4],avg_list_vente2[4],avg_list_loc2[3],mean_detail(avg_list_vente2[4]),mean_detail(avg_list_loc2[3])]}
 
+#**************************************xxxxxxxx**********************************************
+def shape_market(csv_file):
+    return pd.read_csv(csv_file, encoding='ISO-8859-1').shape[0]
+
+def for_market(i):
+    j = shape_market(f"jumia_vente{i}.csv")
+    tay_v = shape_market(f"tayara_vente{i}.csv")
+    tay_l = shape_market(f"tayara_loc{i}.csv")
+    tu = shape_market(f"tunisie_loc{i}.csv")
+    dict_vente={"Tayara":tay_v,"Jumia":j}
+    dict_loc={"Tayara":tay_l,"Tunisie annonce":tu}
+    dict_all={"Tayara":tay_l+tay_v,"Tunisie annonce":tu,"Jumia":j}
+    return dict_vente,dict_loc,dict_all
+
+dict_market1=for_market(1)#tuple : vente, loc, all
+dict_market2=for_market(2)#tuple : vente, loc, all
+
+dict_market_all=[dict_market1,dict_market2]
 # **********************************************************************************
+#def nb_ann(str,df):#vente or loc
+
+
+
 
 
 
@@ -114,29 +201,28 @@ class data(object):
     lable = ""
     y = 0
     url = ""
-
     def __init__(self, label, y, u):
         self.label = label
         self.y = y
         self.url = u
 
 
-alpha_urls = ['/learn', "/detail/2", "http://bing.com/", "http://bing.com/",
-              "http://bing.com/", "http://bing.com/", "http://bing.com/",
-              "http://bing.com/", "http://bing.com/", "http://bing.com/", "http://bing.com/"]  # "{{ url_for('learn') }}"
-alpha_urls_loc = ["http://bing.com/", "http://bing.com/", "http://bing.com/", "http://bing.com/",
-                  "http://bing.com/", "http://bing.com/", "http://bing.com/",
-                  "http://bing.com/", "http://bing.com/", "http://bing.com/", "http://bing.com/", "http://bing.com/", "http://bing.com/"]
-alpha_urls_ratio = ["http://bing.com/", "http://bing.com/", "http://bing.com/", "http://bing.com/",
-                    "http://bing.com/", "http://bing.com/", "http://bing.com/",
-                    "http://bing.com/", "http://bing.com/", "http://bing.com/", "http://bing.com/", "http://bing.com/", "http://bing.com/", "http://bing.com/"]
-
-
-# IF YOU ADD ANOTHER NEXT (You don't really add an html file, but you rerender the current one with different data)
-"""tab_market_vente = [list_market_vente1]
-tab_market_loc = [list_market_loc1]
-tab_list_market_values = [list_market_values1]"""
-
+class data_detail(object):
+    list_countries=list()
+    ann_vente = list()
+    ann_loc = list()
+    prix=list()
+    prixl=list()
+    mean_vente=0
+    mean_loc=0
+    def __init__(self,list_countries,ann_vente,ann_loc,prix,prixl,mean_vente,mean_loc):
+        self.list_countries=list_countries
+        self.ann_vente=ann_vente
+        self.ann_loc=ann_loc
+        self.prix=prix
+        self.prixl=prixl
+        self.mean_loc=mean_loc
+        self.mean_vente=mean_vente
 # ****************************************************************************************************
 
 

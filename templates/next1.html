@@ -3,49 +3,41 @@
 <html lang="en">
 {%block content%}
 
-<div id="chartContainer" style="height: 300px; width: 85%;"></div>
-
-<button class="button button1" style="font-size:16px;" id="exportChart">Export Chart</button>
-
- <div id="chartLoc" style="height: 300px; width: 85%;"></div>
- <button class="button button1" style="font-size:16px;" id="exportChartLoc">Export Chart</button>
- 
- <div id="chartRatio" style="height: 300px; width: 85%;"></div>
- <button class="button button1" style="font-size:16px;" id="exportChartRatio">Export Chart</button>
- 
- <h1 style="font: bold">Marketplace </h1>  
-
-    <div class="inline">
-<div id="chart_vente" style="height: 300px; width: 100%;"></div>
-<div id="chart_loc" style="height: 300px; width: 100%;"></div>
-<div id="chart_mark" style="height: 300px; width: 100%;"></div>
-    </div>    
+<div id="chartContainer" style="width: 45%; height: 300px;display: inline-block;"></div>
+<div id="chartLoc" style="width: 45%; height: 300px;display: inline-block;"></div>
+<div id="chartRatio" style="height: 300px; width: 85%;"></div>
+<h1 style="font: bold">Marketplace </h1>  
+<div id="chart_vente" style="width: 45%; height: 300px;display: inline-block;"></div>
+<div id="chart_loc" style="width: 45%; height: 300px;display: inline-block;"></div>
+<div id="chart_mark" style="width: 45%; height: 300px;display: inline-block;"></div>
       <br><br>  <br><br> <br><br> <br>
-      </div>
-        <button class="button button1" style="font-size:30px;"><a href={{ url_for('next',id=2) }}>Next extraction</a></button>
-     
-
-    <!-- Graphs -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>   
-    
- <script>
-
-      
-
-</script>
-
-
+<button class="button button1" style="font-size:30px;"><a href={{ url_for('next',id=current_id+1) }}>Next extraction</a></button>
+<!-- Graphs -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>   
 <script type="text/javascript">
 window.onload = function () {
+     CanvasJS.addColorSet("greenShades",
+        [//colorSet Array
+            "#0F2043",
+			"#79CEDC",
+            "#D5A458"
+            
+            ]);
 	var chart = new CanvasJS.Chart("chartContainer", {
 		theme: "theme3",
+		
 		title:{
 			text: "Prix par m2 en Vente"              
 		},
-   // axisY: { maximum: 40000 },
-
+      axisY:{    
+        /*valueFormatString:  "#,##0.##", // move comma to change formatting
+        prefix: "TND"*/
+		title:"TND",
+		gridThickness: .1
+		},
 		data: [              
 		{
+			color: "rgba(255,12,32,.3)",
 			type: "column",
       cursor:"pointer",
       click: onClick, 
@@ -54,36 +46,100 @@ window.onload = function () {
                 { label:"{{d.label}}",  y: {{d.y}},href: "{{d.url}}" },
             {%endfor%}
             ]
+	}
+]
+	});
+chart.render();
+function onClick(e){
+//  	console.log(e.dataPoint.href) 
+     window.open(e.dataPoint.href,'_blank');  
+};
+ 	/*document.getElementById("exportChart").addEventListener("click",function(){
+    	chart.exportChart({format: "jpg"});
+    }); */ 
+
+	//****************************************************************************
+var chart_loc = new CanvasJS.Chart("chartLoc", {
+		theme: "theme3",
+		title:{
+			text: "Prix par m2 en Loc "              
+		},
+         axisY:{    
+        /*valueFormatString:  "#,##0.##", // move comma to change formatting
+        prefix: "TND"*/
+		title:"TND",
+		gridThickness: .1
+		},
+		data: [              
+		{
+			color: "rgba(255,12,32,.3)",
+			type: "column",
+			cursor:"pointer",
+      		click: onClick, 
+			dataPoints:[
+            {% for d in data_points_loc %} 
+                { label:"{{d.label}}",  y: {{d.y}} ,href: "{{d.url}}"},
+            {%endfor%}
+            ]
 
 		}
 		]
 	});
   
-	chart.render();
+	chart_loc.render();
   function onClick(e){
      	console.log(e.dataPoint.href) 
         window.open(e.dataPoint.href,'_blank');  
 };
- 	document.getElementById("exportChart").addEventListener("click",function(){
+ 	/*document.getElementById("exportChartLoc").addEventListener("click",function(){
     	chart.exportChart({format: "jpg"});
+    }); */
+
+var chart_loc = new CanvasJS.Chart("chartRatio", {
+    theme: "theme8",
+	title:{
+		text: "Prix par m2 en Ratio"              
+		},
+    axisY:{    
+		gridThickness: .1
+		},
+	data: [              
+	{ 
+	    color: "rgba(255,12,32,.3)",
+		type: "column",
+		dataPoints:[
+        {% for d in data_points_ratio %} 
+            { label:"{{d.label}}",  y: {{d.y}} },
+        {%endfor%}
+       ]
+	}
+	]
     });  
+chart_loc.render();
+ 	/*document.getElementById("exportChartRatio").addEventListener("click",function(){
+    	chart.exportChart({format: "jpg"});
+    }); */
+
 //************************************************************************
 //ATLA3 ILFOU9
 var chart = new CanvasJS.Chart("chart_vente", {
 	animationEnabled: true,
+	colorSet: "greenShades",
 	title: {
 		text: "Vente"
 	},
   /*height:260,
   width:200,*/
+
 	data: [{
+		//color: "LightSeaGreen",
 		type: "pie",
 		startAngle: 40,
 		yValueFormatString: "##0.00\"%\"",
-		indexLabel: "{label} {y}",
+		indexLabel: "{label}",
 		dataPoints: [
         {% for d in data_points_mark_vente %} 
-            { label:"{{d.label}}",  y: {{d.y}} },
+            {label:"{{d.label}}",  y: {{d.y}}  },
         {%endfor%}
 		]
 	}]
@@ -94,14 +150,16 @@ chart.render();
 //*********************************************************************************
 var chart = new CanvasJS.Chart("chart_loc", {
 	animationEnabled: true,
+	colorSet: "greenShades",
 	title: {
 		text: "Location"
 	},
 	data: [{
+		//color: "LightSeaGreen",
 		type: "pie",
 		startAngle: 240,
 		yValueFormatString: "##0.00\"%\"",
-		indexLabel: "{label} {y}",
+		indexLabel: "{label}",
 		dataPoints: [
         {% for d in data_points_mark_loc %} 
             { label:"{{d.label}}",  y: {{d.y}} },
@@ -114,15 +172,17 @@ chart.render();
 //***********************************************************************
 var chart = new CanvasJS.Chart("chart_mark", {
 	animationEnabled: true,
+	colorSet: "greenShades",
 	title: {
 		text: "Both"
 	},
 
 	data: [{
+		//color: "LightSeaGreen",
 		type: "pie",
 		startAngle: 240,
 		yValueFormatString: "##0.00\"%\"",
-		indexLabel: "{label} {y}",
+		indexLabel: "{label}",
 		dataPoints: [
         {% for d in data_points_mark_all %} 
             { label:"{{d.label}}",  y: {{d.y}} },
@@ -131,64 +191,9 @@ var chart = new CanvasJS.Chart("chart_mark", {
 	}]
 });
 chart.render();
-//****************************************************************************
-   	var chart_loc = new CanvasJS.Chart("chartLoc", {
-		theme: "theme8",
-		title:{
-			text: "Prix par m2 en Loc "              
-		},
-    axisY: { },
-    axisX:{
-      interval: 1,
-      labelAngle: -70 
-     },
-		data: [              
-		{
-			type: "column",
-			dataPoints:[
-            {% for d in data_points_loc %} 
-                { label:"{{d.label}}",  y: {{d.y}} },
-            {%endfor%}
-            ]
-
-		}
-		]
-	});
-  
-	chart_loc.render();
- 	document.getElementById("exportChartLoc").addEventListener("click",function(){
-    	chart.exportChart({format: "jpg"});
-    }); 
-
-    	var chart_loc = new CanvasJS.Chart("chartRatio", {
-		theme: "theme8",
-		title:{
-			text: "Prix par m2 en Ratio"              
-		},
-		data: [              
-		{
-			type: "column",
-			dataPoints:[
-            {% for d in data_points_ratio %} 
-                { label:"{{d.label}}",  y: {{d.y}} },
-            {%endfor%}
-            ]
-
-		}
-		]
-	});
-  
-	chart_loc.render();
- 	document.getElementById("exportChartRatio").addEventListener("click",function(){
-    	chart.exportChart({format: "jpg"});
-    }); 
-
 }
 </script>
   <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-
-
-
  <br>
  <br>
  

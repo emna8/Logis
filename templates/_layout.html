@@ -15,7 +15,7 @@
     <link rel="shortcut icon" href="../static/delivery-truck.png"/>
 
     <!-- Custom styles for this template -->
-    <link href="../static/dashboard.css" rel="stylesheet">
+   <link href="../static/dashboard.css" rel="stylesheet">
     <link href="../assets/mdb.css" rel="stylesheet">
     <link href="../assets/bootstrap.min.css">
     <link href="../assets/mdb.min.css">
@@ -24,26 +24,70 @@
     {%else%}
     <title>Dashboard</title>
     {%endif%}
+<style>
+.dropbtn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+</style>
     
 </head>
 <body>
+    <!--   <h2 id="month" ></h2>-->
         <header class="site-header">
                 <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
                   <div class="container">
                     <a class="navbar-brand mr-4" href="/">Dashboard</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
                     </button>
                   </div>
                 </nav>
               </header>
-              <img src="../static/map.png" width="240" height="410" class="left"/>
-              
-              <main role="main" class="container">
-                  
-                  {% block content %}{% endblock %}
-                  
-              </main>
+            <!--  <img src="../static/map.png" width="240" height="410" class="left"/>-->
+<div class="dropdown">
+<button onclick="myFunction()" class="dropbtn">Select a month</button>
+
+<div id="myDropdown" class="dropdown-content">
+<a href={{ url_for('next',id=0) }}><strong style="font-size:20px;">Juillet</strong></a>
+<a href={{ url_for('next',id=1) }}><strong style="font-size:20px;">Aout</strong></a>
+</div>
+</div>
+  <main role="main" class="container">
+    {% block content %}{% endblock %}
+  </main>
    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
    <script src="../assets/js/vendor/popper.min.js"></script>
    <script src="../assets/bootstrap.min.css"></script>
@@ -53,6 +97,22 @@
        <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
        <script src="../assets/js/vendor/popper.min.js"></script>
        <script src="../assets/bootstrap.min.css"></script>
+
+<script type="text/javascript">
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+var url=window.location.href;
+console.log(url)
+/*if(url=="http://127.0.0.1:5000/" || url=="http://127.0.0.1:5000/next/0" ){
+  document.getElementById("juillet").style.display="inline";
+  //document.getElementById("month").innerHTML = "Juillet";
+}
+if(url=="http://127.0.0.1:5000/next/1"){
+  document.getElementById("aout").style.display="inline";
+  //document.getElementById("month").innerHTML = "Aout";
+}*/
+</script>
 
 <!-- Footer -->
 <footer >
