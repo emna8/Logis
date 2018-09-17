@@ -1,15 +1,15 @@
 {% extends "_layout.html" %}
 <!doctype html>
 <html lang="en">
-{%block content%}
+{% block content %}
 
 <div id="chartContainer" style="width: 45%; height: 300px;display: inline-block;"></div>
 <div id="chartLoc" style="width: 45%; height: 300px;display: inline-block;"></div>
-<div id="chartRatio" style="height: 300px; width: 85%;"></div>
-<h1 style="font: bold">Marketplace </h1>  
+<div id="chartRatio" style="height: 300px; width: 85%;"></div><br/><br/>
+<h1 style="font: bold">Marketplace </h1>  <br/><br/>
 <div id="chart_vente" style="width: 45%; height: 300px;display: inline-block;"></div>
 <div id="chart_loc" style="width: 45%; height: 300px;display: inline-block;"></div>
-<div id="chart_mark" style="width: 45%; height: 300px;display: inline-block;"></div>
+<div id="chart_mark" style="width: 92%; height: 300px;display: inline-block;"></div>
       <br><br>  <br><br> <br><br> <br>
 <button class="button button1" style="font-size:30px;"><a href={{ url_for('next',id=current_id+1) }}>Next extraction</a></button>
 <!-- Graphs -->
@@ -62,7 +62,7 @@ function onClick(e){
 var chart_loc = new CanvasJS.Chart("chartLoc", {
 		theme: "theme3",
 		title:{
-			text: "Prix par m2 en Loc "              
+			text: "Prix par m2 en Location "              
 		},
          axisY:{    
         /*valueFormatString:  "#,##0.##", // move comma to change formatting
