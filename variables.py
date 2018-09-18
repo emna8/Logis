@@ -53,8 +53,8 @@ all_df_loc=fill_all_defs("loc")
 #***************************AVG Vente**********************************
 #Return the avg in a giving country
 def avg(str, df):
-    return df[df["Country"] == str].Moy_prix_by_size.mean()
-# *********************RATIO*************************************
+    return round(df[df["Country"] == str].Moy_prix_by_size.mean(),2)
+# *********************RATIO*************************************)
 def ratio(str, df_vente, df_loc):
     vente = avg(str, df_vente)
     loc = avg(str, df_loc)
@@ -100,7 +100,7 @@ def avg_detail(folder,list_detail_coutries):
     for c in list_detail_coutries:
         try:
             df=pd.read_csv(rf'{folder}\{c}.csv',encoding="latin 1")
-            v=df["Moy_prix_by_size"].mean()
+            v=round(df["Moy_prix_by_size"].mean(),2)
             an=df.shape[0] # i will send vente country also for loc, if it doesnt exists : an=0
             list_annonce.append(an)
             list_detail.append(v)
