@@ -189,10 +189,12 @@ class data(object):
     lable = ""
     y = 0
     url = ""
-    def __init__(self, label, y,u='/no_deatil'):
+    color=""
+    def __init__(self, label, y,u='/no_deatil',color="#0074D9"):
         self.label = label
         self.y = y
         self.url = u
+        self.color=color
 
 class data_detail(object):
     list_countries=list()

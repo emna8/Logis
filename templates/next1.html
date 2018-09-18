@@ -2,7 +2,7 @@
 <!doctype html>
 <html lang="en">
 {% block content %}
-
+<br><br>
 <div id="chartContainer" style="width: 45%; height: 300px;display: inline-block;"></div>
 <div id="chartLoc" style="width: 45%; height: 300px;display: inline-block;"></div>
 <div id="chartRatio" style="height: 300px; width: 85%;"></div><br/><br/>
@@ -37,13 +37,13 @@ window.onload = function () {
 		},
 		data: [              
 		{
-			color: "rgba(255,12,32,.3)",
+   		    //color: "{{color}}",
 			type: "column",
       cursor:"pointer",
       click: onClick, 
 			dataPoints:[
             {% for d in data_points %} 
-                { label:"{{d.label}}",  y: {{d.y}},href: "{{d.url}}" },
+                { label:"{{d.label}}",  y: {{d.y}},href: "{{d.url}}",color:"{{d.color}}" },
             {%endfor%}
             ]
 	}
@@ -72,13 +72,13 @@ var chart_loc = new CanvasJS.Chart("chartLoc", {
 		},
 		data: [              
 		{
-			color: "rgba(255,12,32,.3)",
+   		    //color: "{{color}}",
 			type: "column",
 			cursor:"pointer",
       		click: onClick, 
 			dataPoints:[
             {% for d in data_points_loc %} 
-                { label:"{{d.label}}",  y: {{d.y}} ,href: "{{d.url}}"},
+                { label:"{{d.label}}",  y: {{d.y}} ,href: "{{d.url}}",color:"{{d.color}}"},
             {%endfor%}
             ]
 
@@ -105,7 +105,7 @@ var chart_loc = new CanvasJS.Chart("chartRatio", {
 		},
 	data: [              
 	{ 
-	    color: "rgba(255,12,32,.3)",
+	    color: "#0074D9",
 		type: "column",
 		dataPoints:[
         {% for d in data_points_ratio %} 

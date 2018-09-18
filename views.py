@@ -14,16 +14,17 @@ def next(id):
     for a, b in zip(list_country_vente, all_list_avg_vente[id]):
         if(a in countries_to_detail):
             i += 1
-            list_obj_vente.append(data(a, b, f'/detail/{i}/{a}/{id}'))
+            list_obj_vente.append(data(a, b, f'/detail/{i}/{a}/{id}',"#34dbcb"))
         else:
             list_obj_vente.append(data(a, b))
 
     for a, b in zip(list_country_loc, all_list_avg_loc[id]):
         if(a in countries_to_detail):  
             i += 1
-            list_obj_loc.append(data(a, b, f'/detail/{i}/{a}/{id}'))
+            list_obj_loc.append(data(a, b, f'/detail/{i}/{a}/{id}',"#34dbcb"))
         else:
             list_obj_loc.append(data(a, b))
+
 
     for a, b in zip(list_country_ratio, all_list_ratio[id]):
         i += 1
@@ -44,7 +45,8 @@ def next(id):
                            data_points_mark_all=data_points_mark_all,
                            data_points_mark_loc=data_points_mark_loc,
                            current_id=id,
-                           countries_to_detail=countries_to_detail)
+                           countries_to_detail=countries_to_detail,
+                           )
 
 # ****************************************************************************************************
 

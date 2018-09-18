@@ -8,6 +8,11 @@
 <button class="button button1" style="font-size:16px;" id="exportChartLoc">Export Chart</button>
 <br><br>
 
+<style>
+td{
+    font-size:18.5px;
+}
+</style>
 {% set green="#00FF00" %}
 {% set red="#FF0000" %}
 <table  class="table" id="myTable">
@@ -117,12 +122,13 @@ window.onload = function () {
 		title:"TND"},
 		data: [              
 		{
-        color: "rgba(255,12,32,.3)",
+        color: "#0074D9",
         type: "column",
         cursor:"pointer",
         click: onClick, 
 			dataPoints:[
             {% for d in data_points %} 
+                
                 { label:"{{d.label}}",  y: {{d.y}},href: "{{d.url}}" },
             {%endfor%}
             ]
@@ -151,7 +157,7 @@ var chart_loc = new CanvasJS.Chart("chartLoc", {
 		title:"TND"},
 		data: [              
 		{
-            color: "rgba(255,12,32,.3)",
+            color: "#0074D9",
     		type: "column",
 			dataPoints:[
             {% for d in data_points_loc %} 
