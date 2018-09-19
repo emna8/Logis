@@ -23,9 +23,9 @@
     <title>Dashboard</title>
     {%endif%}
 <style>
+
 .footer {
-  
-  left: 0;
+ left: 0;
   bottom: 0;
   width: 100%;
   background-color:rgba(0, 0, 0, 0.9);
@@ -74,7 +74,7 @@
                 <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
                   <div class="container">
                     <a class="navbar-brand mr-4" href="/">Dashboard</a>
-                    <a class="navbar-brand mr-4" href={{url_for('compare')}}>Compare</a>
+                    <a class="navbar-brand mr-4" href={{url_for('compare')}}>Comparer</a>
 
                     </button>
                   </div>
@@ -85,7 +85,6 @@
 
 <div class="dropdown">
 <button onclick="myFunction()" class="dropbtn">Selectionner un mois</button>
-
 <div id="myDropdown" class="dropdown-content">
 <a href={{ url_for('next',id=0) }}><strong style="font-size:20px;">Juillet</strong></a>
 <a href={{ url_for('next',id=1) }}><strong style="font-size:20px;">Aout</strong></a>
