@@ -118,7 +118,6 @@ Pygments==2.2.0
 pygrametl==2.5
 PyHamcrest==1.9.0
 pylint==2.0.1
-pyodbc==4.0.17
 pyOpenSSL==17.2.0
 pyparsing==2.2.0
 PySocks==1.6.7
