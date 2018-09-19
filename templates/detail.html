@@ -156,8 +156,7 @@ window.onload = function () {
         click: onClick, 
 			dataPoints:[
             {% for d in data_points %} 
-                
-                { label:"{{d.label}}",  y: {{d.y}},href: "{{d.url}}" },
+               { label:"{{d.label}}",  y: {{d.y}},href: "{{d.url}}" },
             {%endfor%}
             ]
 		}
@@ -166,8 +165,7 @@ window.onload = function () {
   
 	chart.render();
   function onClick(e){
-     	console.log(e.dataPoint.href) 
-        window.open(e.dataPoint.href,'_blank');  
+         window.open(e.dataPoint.href,'_blank');  
 };
 document.getElementById("exportChart").addEventListener("click",function(){
     	chart.exportChart({format: "jpg"});
