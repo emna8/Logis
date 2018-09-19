@@ -123,7 +123,6 @@ pycurl==7.43.0
 PyDispatcher==2.0.5
 pyflakes==1.6.0
 Pygments==2.2.0
-pygpu==0.7.5
 pygrametl==2.5
 PyHamcrest==1.9.0
 pylint==2.0.1
