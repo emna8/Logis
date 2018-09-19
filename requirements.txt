@@ -20,7 +20,6 @@ click==6.7
 cloudpickle==0.4.0
 colorama==0.3.9
 colorlover==0.2.1
-comtypes==1.1.2
 constantly==15.1.0
 contextlib2==0.5.5
 cryptography==2.0.3
