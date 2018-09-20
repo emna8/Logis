@@ -162,8 +162,8 @@ window.onload = function () {
 		}
 		]
 	});
-  console.log({{data_points}})
 	chart.render();
+
   function onClick(e){
          window.open(e.dataPoint.href,'_blank');  
 };
@@ -199,8 +199,13 @@ var chart_loc = new CanvasJS.Chart("chartLoc", {
     }); 
  
 }
+  
+
 </script>
 
   <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
+<script type="text/javascript" >
+console.log("{{data_points[0].label}}");
+</script>
 {%endblock%}
