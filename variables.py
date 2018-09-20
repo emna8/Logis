@@ -4,11 +4,11 @@ csv_files_NUMBER=2
 
 # **********************************************List COUTRIES***************************************
 list_country_vente = [
-    'Bizerte',
     'Banlieue Nord',
     'Les Berges du Lac',
     'Ariana',
     'Ben arous',
+    'Bizerte',
     'Sousse',
     'Mannouba',
     'Nabeul',
@@ -18,12 +18,12 @@ list_country_vente = [
  ]
 
 list_country_loc = [
-    'Bizerte',
     'Banlieue Nord',
     'Ariana',
     'Ben arous',
     'Bardo',
     'Mannouba', 
+    'Bizerte',
     'Nabeul',   
     'Sfax',
     'Sousse',   

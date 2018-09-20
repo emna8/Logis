@@ -66,10 +66,12 @@ window.onload = function () {
 		},
 		data: [              
 		{
-   		    //color: "{{color}}",
-			type: "column",
-      cursor:"pointer",
-      click: onClick, 
+     	type: "column",
+         cursor:"pointer",
+		 color: "#34dbcb",
+	     legendText:"clickable",
+          showInLegend: true,
+         click: onClick, 
 			dataPoints:[
             {% for d in data_points %} 
                 { label:"{{d.label}}",  y: {{d.y}},href: "{{d.url}}",color:"{{d.color}}" },
@@ -101,7 +103,9 @@ var chart_loc = new CanvasJS.Chart("chartLoc", {
 		},
 		data: [              
 		{
-   		    //color: "{{color}}",
+   		  color: "#34dbcb",
+	      legendText:"clickable",
+          showInLegend: true,
 			type: "column",
 			cursor:"pointer",
       		click: onClick, 
