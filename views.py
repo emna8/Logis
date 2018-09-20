@@ -1,5 +1,6 @@
 from app import app,render_template,pd
 from variables import data,dict_detail1,dict_detail2,dict_market_all,dict_loc1,dict_loc2,dict_vente2,dict_vente1,list_country_vente,list_country_loc,list_country_ratio,all_list_avg_vente,all_list_avg_loc,all_list_ratio ,data,data_detail
+import json
                     
 countries_to_detail=["Banlieue Nord","Les Berges du Lac","Ariana","Ben arous","Sousse"]
 @app.route("/next/<int:id>")
@@ -68,14 +69,13 @@ def for_detail(dict_vente,dict_loc,country,dict_ann):
     
 @app.route('/detail/<int:id>/<string:country>/<int:next_page>')
 def detail(id,country,next_page):
-    return 'ok'
     print(f"Country {country}")
-    if next_page==0:
-        list_obj_vente,list_obj_loc,obj_ann=for_detail(dict_vente1,dict_loc1,country,dict_detail1)
+    if next_page == 0:
+        list_obj_vente, list_obj_loc, obj_ann = for_detail(dict_vente1, dict_loc1, country, dict_detail1)
     else:
-        list_obj_vente,list_obj_loc,obj_ann=for_detail(dict_vente2,dict_loc2,country,dict_detail2)  
-    
+        list_obj_vente, list_obj_loc, obj_ann = for_detail(dict_vente2, dict_loc2, country, dict_detail2)  
     print(obj_ann.prix)
+    return (list_obj_vente[0].label) #, list_obj_loc, obj_ann))
     return render_template('detail.html',
         data_points=list_obj_vente,
         data_points_loc=list_obj_loc,
