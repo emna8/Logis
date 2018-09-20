@@ -74,7 +74,7 @@ def detail(id,country,next_page):
     else:
         list_obj_vente, list_obj_loc, obj_ann = for_detail(dict_vente2, dict_loc2, country, dict_detail2)  
     print(obj_ann.prix)
-    return (list_obj_vente[0].label) #, list_obj_loc, obj_ann))
+    #return (list_obj_vente[0].label) #, list_obj_loc, obj_ann))
     return render_template('detail.html',
         data_points=list_obj_vente,
         data_points_loc=list_obj_loc,
