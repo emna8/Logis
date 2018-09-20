@@ -122,22 +122,10 @@ td{
 </td>
 </tr>
 </table>
-<p>La couleur rouge represente les prix supperieur au seuil.</p>
-<p>La couleur verte represente les prix inferieur au seuil.</p>
+<p>* La couleur rouge represente les prix supperieur au seuil.</p>
+<p>* La couleur verte represente les prix inferieur au seuil.</p>
 
 <script type="text/javascript">
-function addRows() {
-    var table = document.getElementById("myTable");
-    var row = table.insertRow(1);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
-    cell1.innerHTML = "Byrsa";
-    cell2.innerHTML = "10";
-	cell3.innerHTML="5";
-	cell4.innerHTML="14.2";
-}
 window.onload = function () {
 	//addRows();
 	var chart = new CanvasJS.Chart("chartContainer", {

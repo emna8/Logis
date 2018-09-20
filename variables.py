@@ -99,9 +99,9 @@ def avg_detail(folder,list_detail_coutries):
     list_annonce=list()
     for c in list_detail_coutries:
         try:
-            #path=folder+"\%s.csv"%(c)
-            #rf'{folder}\{c}.csv'
-            df=pd.read_csv(rf'{folder}\{c}.csv',encoding="latin 1")
+            path=folder+"\%s.csv"%(c)
+            #path=rf'{folder}\{c}.csv'
+            df=pd.read_csv(path,encoding="latin 1")
             v=round(df["Moy_prix_by_size"].mean(),2)
             print(v)
             an=df.shape[0] # i will send vente country also for loc, if it doesnt exists : an=0
