@@ -40,7 +40,7 @@ background-color: #555555;
 color: white;
 }
 </style>
-<button class="button button1" style="font-size:30px;"><a href={{ url_for('next',id=current_id+1) }}>Next extraction</a></button>
+<button class="button button1" style="font-size:30px;"><a href={{ url_for('next',id=current_id+1) }}>Extraction suivante</a></button>
 <!-- Graphs -->
 <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>   
 <script type="text/javascript">
@@ -207,7 +207,7 @@ var chart = new CanvasJS.Chart("chart_mark", {
 	animationEnabled: true,
 	colorSet: "greenShades",
 	title: {
-		text: "Both"
+		text: "Vente et location"
 	},
 
 	data: [{
