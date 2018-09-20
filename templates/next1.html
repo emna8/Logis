@@ -4,6 +4,7 @@
 {% block content %}
 <br><br>
 <h2 id ="month" style="text-align: center; color:#191970;"></h2>
+
 <p><i style="color:green; font-size:19px">* Cliquez sur une barre pour plus de détails </i></p>
 <div id="chartContainer" style="width: 90%; height: 300px;display: inline-block;"></div>
 <div id="chartLoc" style="width: 90%; height: 300px;display: inline-block;"></div>
@@ -45,10 +46,11 @@ color: white;
 <button class="button button1" style="font-size:30px;"><a href={{ url_for('next',id=current_id+1) }}>Extraction suivante</a></button>
 <!-- Graphs -->
 <script type="text/javascript">
-if (window.location.href=="http://127.0.0.1:5000/" || window.location.href=="http://127.0.0.1:5000/next/0" ){
+var url=window.location.href;
+if (url=="https://logis.herokuapp.com/" || url=="https://logis.herokuapp.com/next/0"|| url=="http://127.0.0.1:5000/" || url=="http://127.0.0.1:5000/next/0" ){
 	document.getElementById("month").innerHTML="Juillet";
 }
-if (window.location.href=="http://127.0.0.1:5000/next/1"){
+if (url=="https://logis.herokuapp.com/next/1" || url=="http://127.0.0.1:5000/next/1"){
 	document.getElementById("month").innerHTML="Aout";
 }
 window.onload = function () {
