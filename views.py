@@ -1,6 +1,5 @@
 from app import app,render_template,pd
 from variables import data,dict_detail1,dict_detail2,dict_market_all,dict_loc1,dict_loc2,dict_vente2,dict_vente1,list_country_vente,list_country_loc,list_country_ratio,all_list_avg_vente,all_list_avg_loc,all_list_ratio ,data,data_detail
-import json
                     
 countries_to_detail=["Banlieue Nord","Les Berges du Lac","Ariana","Ben arous","Sousse"]
 @app.route("/next/<int:id>")
