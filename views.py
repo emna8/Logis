@@ -68,6 +68,7 @@ def for_detail(dict_vente,dict_loc,country,dict_ann):
     
 @app.route('/detail/<int:id>/<string:country>/<int:next_page>')
 def detail(id,country,next_page):
+    return 'ok'
     print(f"Country {country}")
     if next_page==0:
         list_obj_vente,list_obj_loc,obj_ann=for_detail(dict_vente1,dict_loc1,country,dict_detail1)
