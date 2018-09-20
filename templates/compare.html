@@ -5,8 +5,13 @@
 
 <div id="chartContainer" style="width: 45%; height: 300px;display: inline-block;"></div>
 <div id="chartContainer2" style="width: 45%; height: 300px;display: inline-block;"></div>
+<button class="button button1" style="width: 45%;" id="exportChart1">Export Chart</button>
+<button class="button button1" style="width: 45%;" id="exportChart2">Export Chart</button>
+<br><br>
 <div id="chartLoc" style="width: 45%; height: 300px;display: inline-block;"></div>
 <div id="chartLoc2" style="width: 45%; height: 300px;display: inline-block;"></div>
+<button class="button button1" style="width: 45%;" id="exportChart3">Export Chart</button>
+<button class="button button1" style="width: 45%;" id="exportChart4">Export Chart</button>
 
 <br><br>  <br><br> <br><br> <br>
     <!-- Graphs -->
@@ -33,13 +38,15 @@ window.onload = function () {
                 { label:"{{d.label}}",  y: {{d.y}} },
             {%endfor%}
             ]
-
-		}
+	}
 		]
 	});
-  
 	chart.render();
-	var chart = new CanvasJS.Chart("chartContainer2", {
+	document.getElementById("exportChart1").addEventListener("click",function(){
+    	chart.exportChart({format: "jpg"});
+    }); 
+
+	var chart2 = new CanvasJS.Chart("chartContainer2", {
 		theme: "theme3",
 		title:{
 			text: "Prix par m2 en vente Aout"              
@@ -63,8 +70,10 @@ window.onload = function () {
 		}
 		]
 	});
-  
-	chart.render(); 
+	chart2.render(); 
+	document.getElementById("exportChart2").addEventListener("click",function(){
+    	chart2.exportChart({format: "jpg"});
+    }); 
 
 var chart_loc = new CanvasJS.Chart("chartLoc", {
 		theme: "theme3",
@@ -89,10 +98,12 @@ var chart_loc = new CanvasJS.Chart("chartLoc", {
 		}
 		]
 	});
-  
 	chart_loc.render();
+	document.getElementById("exportChart3").addEventListener("click",function(){
+    	chart_loc.exportChart({format: "jpg"});
+    }); 
 
-    var chart_loc = new CanvasJS.Chart("chartLoc2", {
+    var chart_loc2 = new CanvasJS.Chart("chartLoc2", {
 		theme: "theme3",
 		title:{
 			text: "Prix par m2 en Location Aout "              
@@ -115,8 +126,10 @@ var chart_loc = new CanvasJS.Chart("chartLoc", {
 		}
 		]
 	});
-  
-	chart_loc.render();
+	chart_loc2.render();
+	document.getElementById("exportChart4").addEventListener("click",function(){
+    	chart2.exportChart({format: "jpg"});
+    }); 
  
 }
 </script>

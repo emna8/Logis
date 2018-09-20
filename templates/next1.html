@@ -3,6 +3,8 @@
 <html lang="en">
 {% block content %}
 <br><br>
+<h2 id ="month" style="text-align: center; color:#191970;"></h2>
+<p><i style="color:green; font-size:19px">* Cliquez sur une barre pour plus de détails </i></p>
 <div id="chartContainer" style="width: 90%; height: 300px;display: inline-block;"></div>
 <div id="chartLoc" style="width: 90%; height: 300px;display: inline-block;"></div>
 <div id="chartRatio" style="width: 90%; height: 300px;display: inline-block;"></div><br/><br/>
@@ -42,8 +44,13 @@ color: white;
 </style>
 <button class="button button1" style="font-size:30px;"><a href={{ url_for('next',id=current_id+1) }}>Extraction suivante</a></button>
 <!-- Graphs -->
-<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>   
 <script type="text/javascript">
+if (window.location.href=="http://127.0.0.1:5000/" || window.location.href=="http://127.0.0.1:5000/next/0" ){
+	document.getElementById("month").innerHTML="Juillet";
+}
+if (window.location.href=="http://127.0.0.1:5000/next/1"){
+	document.getElementById("month").innerHTML="Aout";
+}
 window.onload = function () {
      CanvasJS.addColorSet("greenShades",
         [//colorSet Array
@@ -62,14 +69,14 @@ window.onload = function () {
         /*valueFormatString:  "#,##0.##", // move comma to change formatting
         prefix: "TND"*/
 		title:"TND",
-		gridThickness: .1
+		gridThickness: .2
 		},
 		data: [              
 		{
      	type: "column",
          cursor:"pointer",
 		 color: "#34dbcb",
-	     legendText:"clickable",
+	     legendText:"Cliquez pour plus de détails",
           showInLegend: true,
          click: onClick, 
 			dataPoints:[
@@ -99,12 +106,12 @@ var chart_loc = new CanvasJS.Chart("chartLoc", {
         /*valueFormatString:  "#,##0.##", // move comma to change formatting
         prefix: "TND"*/
 		title:"TND",
-		gridThickness: .1
+		gridThickness: .2
 		},
 		data: [              
 		{
    		  color: "#34dbcb",
-	      legendText:"clickable",
+	      legendText:"Cliquez pour plus de détails",
           showInLegend: true,
 			type: "column",
 			cursor:"pointer",

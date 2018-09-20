@@ -129,7 +129,7 @@ td{
 <script type="text/javascript">
 window.onload = function () {
 	//addRows();
-	var chart = new CanvasJS.Chart("chartContainer", {
+	var chart1 = new CanvasJS.Chart("chartContainer", {
 		theme: "theme3",
 		title:{
 			text: "Prix par m2 en Vente"              
@@ -154,13 +154,13 @@ window.onload = function () {
 		}
 		]
 	});
-	chart.render();
+	chart1.render();
 
   function onClick(e){
          window.open(e.dataPoint.href,'_blank');  
 };
 document.getElementById("exportChart").addEventListener("click",function(){
-    	chart.exportChart({format: "jpg"});
+    	chart1.exportChart({format: "jpg"});
     });  
 var chart_loc = new CanvasJS.Chart("chartLoc", {
 		theme: "theme3",
@@ -187,7 +187,7 @@ var chart_loc = new CanvasJS.Chart("chartLoc", {
   
 	chart_loc.render();
  	document.getElementById("exportChartLoc").addEventListener("click",function(){
-    	chart.exportChart({format: "jpg"});
+    	chart_loc.exportChart({format: "jpg"});
     }); 
  
 }
